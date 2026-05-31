@@ -9,9 +9,9 @@ import Title from "./components/Title";
 
 function App() {
   const [task, setTasks] = useState([]);
-
+  const API_URL = import.meta.env.VITE_API_LOCAL_URL;
   async function OnDeleteTaskClick(taskId) {
-    await fetch(`http://localhost:8000/tasks/${taskId}`, {
+    await fetch(`${API_URL}tasks/${taskId}`, {
         method: "DELETE"
     });
     const newTask = task.filter((task) => task.id != taskId);
@@ -19,7 +19,7 @@ function App() {
   }
 
   async function onTaskClick(TasksId) {
-    await fetch(`http://localhost:8000/tasks/${TasksId}/is_done`, {
+    await fetch(`${API_URL}tasks/${TasksId}/is_done`, {
         method: "PATCH"
     });
     const NewTask = task.map((task) => {
@@ -36,7 +36,7 @@ function App() {
   }
 
   async function OnAddTaskSubmit(ttitle, ddescription) {
-    await fetch("http://localhost:8000/tasks", {
+    await fetch(`${API_URL}tasks`, {
       method: "POST",
       headers: {
           "Content-Type": "application/json"
@@ -50,7 +50,7 @@ function App() {
   }
 
   async function carregar() {
-    const resposta = await fetch("http://localhost:8000/tasks");
+    const resposta = await fetch(`${API_URL}tasks`);
     const dados = await resposta.json();
     setTasks(dados);
   }

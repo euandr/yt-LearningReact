@@ -3,6 +3,9 @@ from pydantic import BaseModel
 from contextlib import asynccontextmanager
 from database import create_table, conectar_db, insert_task, get_tasksDB, update_taskDB, update_task_statusDB, delete_taskDB, get_task_byIdDB
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+import os
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -12,12 +15,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+load_dotenv()
+origins = os.getenv("CORS_ORIGINS", "").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://127.0.0.1:5173",
-        "http://localhost:5173"
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
