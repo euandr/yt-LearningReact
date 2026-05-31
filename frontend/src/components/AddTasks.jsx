@@ -14,11 +14,16 @@ function AddTasks({ OnAddTaskSubmit }) {
         onChange={(event) => setTitle(event.target.value)}
       />
 
-      <Input
-        type="text"
+      <textarea
         placeholder="Descrição da tarefa"
         value={description}
         onChange={(event) => setDescription(event.target.value)}
+        onInput={(event) => {
+          event.target.style.height = "auto";
+          event.target.style.height = `${event.target.scrollHeight}px`;
+        }}
+        rows={1}
+        className="border-slate-300 outline-slate-400 px-4 py-2 rounded-md resize-none overflow-hidden min-h-[42px]"
       />
 
       <button

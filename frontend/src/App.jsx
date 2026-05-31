@@ -8,20 +8,23 @@ import { v4 } from "uuid";
 import Title from "./components/Title";
 
 function App() {
-  const [task, setTasks] = useState(
-    JSON.parse(localStorage.getItem("tasks")) || []
-  );
+  const [task, setTasks] = useState([]);
 
-  function OnDeleteTaskClick(taskId) {
+  async function OnDeleteTaskClick(taskId) {
+    await fetch(`http://localhost:8000/tasks/${taskId}`, {
+        method: "DELETE"
+    });
     const newTask = task.filter((task) => task.id != taskId);
     setTasks(newTask);
-    // lógica para deletar a tarefa
   }
 
-  function onTaskClick(TasksId) {
+  async function onTaskClick(TasksId) {
+    await fetch(`http://localhost:8000/tasks/${TasksId}/is_done`, {
+        method: "PATCH"
+    });
     const NewTask = task.map((task) => {
       if (task.id == TasksId) {
-        return { ...task, isCompleted: !task.isCompleted };
+        return { ...task, is_done: !task.is_done };
         // Quando uma função executa um return, ela termina imediatamente.
         // esse return é do map
       }
@@ -32,41 +35,34 @@ function App() {
     setTasks(NewTask);
   }
 
-  function OnAddTaskSubmit(title, description) {
-    const NewTask = {
-      id: v4(),
-      title,
-      description,
-      isCompleted: false,
-    };
-    setTasks([...task, NewTask]);
+  async function OnAddTaskSubmit(ttitle, ddescription) {
+    await fetch("http://localhost:8000/tasks", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+          title: ttitle,
+          description: ddescription,
+      })
+    });
+    carregar();
   }
 
-  // dois parâmetros: função e lista
-  // a função é executada toda vez que algum valor da lista muda
+  async function carregar() {
+    const resposta = await fetch("http://localhost:8000/tasks");
+    const dados = await resposta.json();
+    setTasks(dados);
+  }
+
+
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(task));
-  }, [task]);
+    carregar();
+  }, []);
 
   // useEffect(() => {
-  //   async function fetchTasks(){
-  //     // chamar api
-  //     const response = await fetch(
-  //       "https://jsonplaceholder.typicode.com/todos?_limit=10",
-  //       {
-  //         method: "GET",
-  //       }
-  //     );
-
-  //     // pegar dados que ela retorna
-  //     const data = await response.json(); // convertendo resposta para json
-
-  //     // armazenar esses dados no state
-  //     setTasks(data);
-
-  //   }
-  //   fetchTasks();
-  // }, []); // se a lista estiver vazia, executa só uma vez quando o componente for montado ou seja no início
+  //     console.log("do UserState: ",task);
+  // }, [task]);
 
   return (
     <div className="w-screen h-screen bg-slate-500 flex justify-center p-6">
