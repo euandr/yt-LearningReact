@@ -32,4 +32,4 @@ backend/taskAPI/__pycache__
 backend/taskAPI/*.log
 # Ignore virtualenvs inside backend packages
 backend/.venv
-backend/venv
+backend/venvnode_modules/
