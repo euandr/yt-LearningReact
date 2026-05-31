@@ -1,9 +1,11 @@
-# React + Vite
+# Frontend
 
-APP criado para testar meu aprendizado sobre a biblioteca REACT de js. 
+APP criado para testar meu aprendizado sobre a biblioteca REACT de js.
+
 - consolidação de conhecimento adquirido atráves de vídeos do youtube
 
 O app contem apenas duas páginas:
+
 - cadastramento de Tasks
 - Informações sobre a task
 

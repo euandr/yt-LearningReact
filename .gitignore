@@ -1,35 +1,44 @@
+# Root .gitignore for ListTask-IntroReact
 
-# frontend
-# Logs
-frontend/logs
-frontend/*.log
-frontend/npm-debug.log*
-frontend/yarn-debug.log*
-frontend/yarn-error.log*
-frontend/pnpm-debug.log*
-frontend/lerna-debug.log*
+# Node/npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
 
-frontend/node_modules
-frontend/dist
-frontend/dist-ssr
-frontend/*.local
+# Frontend build / deps
+/frontend/node_modules/
+/frontend/dist/
+/frontend/dist-ssr/
+/frontend/.vite/
+/frontend/*.local
 
-# Editor directories and files
-frontend/.vscode/*
-frontend/!.vscode/extensions.json
-frontend/.idea
-frontend/.DS_Store
-frontend/*.suo
-frontend/*.ntvs*
-frontend/*.njsproj
-frontend/*.sln
-frontend/.sw?
-
-# backend
-# Ignore bytecode caches in any backend package
-backend/taskAPI/__pycache__
-# Ignore logs produced by backend services
-backend/taskAPI/*.log
-# Ignore virtualenvs inside backend packages
+# Backend virtualenv and Python artifacts
+/.venv
+venv/
 backend/.venv
-backend/venvnode_modules/
+backend/venv
+*.py[cod]
+__pycache__/
+
+# Databases and sensitive files
+/backend/taskAPI/tasks.db
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+
+# IDE / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist/
+build/
+
+# Other
+public/vite.svg
