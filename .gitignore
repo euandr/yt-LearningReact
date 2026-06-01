@@ -23,8 +23,7 @@ __pycache__/
 
 # Databases and sensitive files
 /backend/taskAPI/tasks.db
-.env
-.env.*
+
 
 # Logs
 logs/
