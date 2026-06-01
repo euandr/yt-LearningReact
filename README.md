@@ -23,11 +23,15 @@ O que o projeto permite
 - Deletar tarefas
 - Comunicação simples entre frontend (React) e backend (FastAPI) via chamadas HTTP
 
-Demonstração
-
-![Imagem 1](image.png)
+> Observação
+> Atualmente o sistema não possui autenticação nem controle de usuários. Todas as tarefas são armazenadas em uma única tabela do banco de dados, portanto qualquer usuário que acessar a aplicação visualizará e manipulará o mesmo conjunto de tarefas.
 
 Arquivos README específicos
 
 - `backend/README.md` — instruções e detalhes do backend
 - `frontend/README.md` — instruções e detalhes do frontend
+Demonstração
+
+![Imagem 1](image.png)
+
+
